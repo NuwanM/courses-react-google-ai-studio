@@ -4,7 +4,20 @@ import React, { useState } from 'react';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navLinks = ['Home', 'Courses', 'About', 'Contact'];
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'Courses', href: '#courses' },
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false); // Close mobile menu after navigation
+  };
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -14,13 +27,13 @@ const Header: React.FC = () => {
         </h1>
         <nav className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
-            <a
-              key={link}
-              href="#"
-              className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium"
+            <button
+              key={link.name}
+              onClick={() => scrollToSection(link.href)}
+              className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium cursor-pointer"
             >
-              {link}
-            </a>
+              {link.name}
+            </button>
           ))}
         </nav>
         <div className="md:hidden">
@@ -58,13 +71,13 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white border-t border-slate-200">
           <nav className="flex flex-col items-center space-y-4 py-4">
             {navLinks.map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium"
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium cursor-pointer"
               >
-                {link}
-              </a>
+                {link.name}
+              </button>
             ))}
           </nav>
         </div>
@@ -74,4 +87,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-   
