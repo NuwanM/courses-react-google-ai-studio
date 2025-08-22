@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false); // Close mobile menu after navigation
+    setIsMenuOpen(false); // Close mobile menu after navigation.
   };
 
   return (
